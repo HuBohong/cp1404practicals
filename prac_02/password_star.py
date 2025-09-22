@@ -1,3 +1,9 @@
+"""
+CP1404/CP5632 Practical
+HuBohong
+Program to get a valid password and display it as stars
+
+"""
 MIN_PASSWORD_LENGTH = 6
 
 
