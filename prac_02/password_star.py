@@ -16,10 +16,12 @@ def main():
 
 
 def print_star(user_password: str):
+    """print stars according to the length of the password"""
     print("*" * len(user_password))
 
 
 def get_password() -> str:
+    """get a valid password"""
     user_password = input("please enter a valid password:")
     return user_password
 

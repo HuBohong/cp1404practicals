@@ -16,6 +16,7 @@ def main():
 
 
 def determine_score(score):
+    """Determine the score level"""
     if score < 0 or score > 100:
         return "Invalid score"
     elif score >= 90:
