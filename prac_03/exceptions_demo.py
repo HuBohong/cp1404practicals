@@ -22,11 +22,13 @@ Answer the following questions:
 try:
     numerator = int(input("Enter the numerator: "))
     denominator = int(input("Enter the denominator: "))
-    if denominator == 0:
+
+    while denominator == 0:
         print("The denominator cannot be zero")
-    else:
-        fraction = numerator / denominator
-        print(fraction)
+        denominator = int(input("Enter the denominator: "))
+
+    fraction = numerator / denominator
+    print(fraction)
 except ValueError:
     print("Numerator and denominator must be valid numbers!")
 print("Finished.")
