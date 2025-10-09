@@ -8,9 +8,9 @@ NUMBER_WIDTH = 2
 
 def main():
     """ """
-    valid_number = get_valid_picks()
-    numbers = generate_numbers(valid_number)
-    print_in_format(numbers)
+    valid_pick = get_valid_picks()
+    picks = generate_pick_numbers(valid_pick)
+    print_picks(picks)
 
 
 def get_valid_picks():
@@ -18,7 +18,7 @@ def get_valid_picks():
     is_valid = False
     while not is_valid:
         try:
-            user_input = int(input(f"how many ""quick picks"" you wish to generate:"))
+            user_input = int(input(f"how many 'quick picks' you wish to generate:"))
             if user_input > 0:
                 is_valid = True
             else:
@@ -28,27 +28,31 @@ def get_valid_picks():
     return user_input
 
 
-def generate_numbers(user_number):
+def generate_pick_numbers(user_number):
     """ """
-    numbers = [[] for i in range(user_number)]
+    # random.sample
+    # numbers = [[] for i in range(user_number)]
+    picks = []
     for i in range(user_number):
-        while len(numbers[i]) < COLUMN_COUNT:
-            random_number = randint(MIN_NUMBER, MAX_NUMBER)
-            if random_number not in numbers[i]:
-                numbers[i].append(random_number)
-        numbers[i].sort()
+        random_numbers = set()
+        while len(random_numbers) < COLUMN_COUNT:
+            random_numbers.add(randint(MIN_NUMBER, MAX_NUMBER))
+            # if random_number not in numbers[i]:
+            #     numbers[i].append(random_number)
+        # numbers[i].sort()
+        picks.append(sorted(random_numbers))
 
-    return numbers
+    return picks
 
 
-def print_in_format(numbers):
+def print_picks(picks):
     """ """
 
-    for i in range(len(numbers)):
-        print(" ".join(f"{number:{NUMBER_WIDTH}}" for number in numbers[i]))
+    for i in range(len(picks)):
+        print(" ".join(f"{number:{NUMBER_WIDTH}}" for number in picks[i]))
 
         # for j in range(COLUMN_COUNT):
-            # print(f"{numbers[i][j]:{NUMBER_WIDTH}}",end=" ")
+        # print(f"{numbers[i][j]:{NUMBER_WIDTH}}",end=" ")
         # print()
 
 
