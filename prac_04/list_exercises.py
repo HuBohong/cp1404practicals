@@ -25,6 +25,7 @@ def get_valid_number(number_length):
 
 
 def print_info(numbers):
+    """ Print the required format """
     print(f"The first number is {numbers[0]}")
     print(f"The last number is {numbers[-1]}")
     print(f"The smallest number is {min(numbers)}")
@@ -33,6 +34,7 @@ def print_info(numbers):
 
 
 def check_username(USERNAME , user_name):
+    """ check user input """
     if user_name not in USERNAME:
         print("Access denied")
     else:
