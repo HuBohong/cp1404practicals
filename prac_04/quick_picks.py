@@ -1,3 +1,8 @@
+"""
+CP1404/CP5632 Practical
+Starter code for cumulative total income program
+"""
+
 from random import randint
 
 COLUMN_COUNT = 6
@@ -7,14 +12,14 @@ NUMBER_WIDTH = 2
 
 
 def main():
-    """ """
+    """ main logic for function call """
     valid_pick = get_valid_picks()
     picks = generate_pick_numbers(valid_pick)
     print_picks(picks)
 
 
 def get_valid_picks():
-    """ """
+    """ get a valid user input """
     is_valid = False
     while not is_valid:
         try:
@@ -29,7 +34,7 @@ def get_valid_picks():
 
 
 def generate_pick_numbers(user_number):
-    """ """
+    """ generate picks """
     # random.sample
     # numbers = [[] for i in range(user_number)]
     picks = []
@@ -46,7 +51,7 @@ def generate_pick_numbers(user_number):
 
 
 def print_picks(picks):
-    """ """
+    """ printout picks in format """
 
     for i in range(len(picks)):
         print(" ".join(f"{number:{NUMBER_WIDTH}}" for number in picks[i]))

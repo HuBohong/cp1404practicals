@@ -1,9 +1,15 @@
+"""
+CP1404/CP5632 Practical
+Starter code for cumulative total income program
+"""
+
 NUMBER_LENGTH = 5
 USERNAME = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye', 'swei45', 'BaseInterpreterInterface', 'BaseStdIn',
             'Command', 'ExecState', 'InteractiveConsole', 'InterpreterInterface', 'StartServer', 'bob']
 
 
 def main():
+    """ function call for check username and validation """
     numbers = get_valid_number(NUMBER_LENGTH)
     print_info(numbers)
     user_name = input("please enter your username")
@@ -11,14 +17,15 @@ def main():
 
 
 def get_valid_number(number_length):
+    """ get a valid number list """
     numbers = []
     for i in range(number_length):
-        flag = False
-        while not flag:
+        is_valid = False
+        while not is_valid:
             try:
                 number = int(input("Numbers: "))
                 numbers.append(number)
-                flag = True
+                is_valid = True
             except ValueError:
                 print("Invalid number")
     return numbers
