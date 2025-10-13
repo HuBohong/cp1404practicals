@@ -5,7 +5,7 @@ COLOR_TO_CODE = {"Azure1": "#f0ffff", "Azure2": "#e0eeee", "Azure3": "#c1cdcd", 
 
 def main():
     user_color = get_valid_color()
-
+    print_color_code(user_color)
 
 def get_valid_color():
     user_color = input("Enter color code: ").title()
@@ -15,5 +15,7 @@ def get_valid_color():
 
     return user_color
 
+def print_color_code(user_color):
+    print(f"{user_color} color code is {COLOR_TO_CODE[user_color]}")
 
 main()
