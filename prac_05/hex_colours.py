@@ -4,18 +4,14 @@ COLOR_TO_CODE = {"Azure1": "#f0ffff", "Azure2": "#e0eeee", "Azure3": "#c1cdcd", 
 
 
 def main():
-    user_color = get_valid_color()
-    print_color_code(user_color)
+    user_color = input("Enter color code: ").strip().title()
+    while user_color != "":
+        try:
+            print(user_color, "is", COLOR_TO_CODE[user_color])
+            user_color = input("Enter color code: ").strip().title()
+        except KeyError:
+            print("Invalid color name")
+            user_color = input("Enter color code: ").strip().title()
 
-def get_valid_color():
-    user_color = input("Enter color code: ").title()
-    while user_color not in COLOR_TO_CODE:
-        print("Invalid color name")
-        user_color = input("Enter color code: ").title()
-
-    return user_color
-
-def print_color_code(user_color):
-    print(f"{user_color} color code is {COLOR_TO_CODE[user_color]}")
 
 main()
