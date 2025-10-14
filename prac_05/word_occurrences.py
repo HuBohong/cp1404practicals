@@ -1,3 +1,10 @@
+"""
+CP1404/CP5632 Practical 5
+word occurrences program
+estimate: 20min
+actual: 1h (bug fix spend longer)
+"""
+
 def main():
     word_to_count = {}
     get_format_sentence(word_to_count)
