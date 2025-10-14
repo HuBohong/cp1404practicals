@@ -1,12 +1,19 @@
 def main():
     word_to_count = {}
+    get_format_sentence(word_to_count)
+    count_word(word_to_count)
+
+
+def get_format_sentence(word_to_count):
     user_sentence = input("Enter any sentence you like:")
     while user_sentence != "":
-
         words = user_sentence.strip().replace(".", "").split(" ")
         for word in words:
             word_to_count[word] = word_to_count.get(word, 0) + 1
         user_sentence = input("Enter any sentence you like:")
+
+
+def count_word(word_to_count):
     word_width = max(len(word) for word in word_to_count.keys())
     count_width = max(len(count) for count in word_to_count.values())
 
