@@ -2,7 +2,7 @@
 CP1404/CP5632 Practical 5
 email practice
 estimate:40min
-actual:
+actual:35min
 """
 EMAIL_SIGN = "@"
 
@@ -14,8 +14,8 @@ def main():
         user_email = get_validate_email(user_email)
         user_name = get_user_name(user_email)
         email_to_name[user_email] = user_name
-
         user_email = input("Enter your email address: ")
+    print_email_to_name(email_to_name)
 
 
 def get_validate_email(user_email):
@@ -32,6 +32,10 @@ def get_user_name(user_email):
     else:
         user_name = input("Please enter your name").title()
         return user_name
+
+def print_email_to_name(email_to_name):
+    for email, name in email_to_name.items():
+        print(f"{name} ({email})")
 
 
 main()
