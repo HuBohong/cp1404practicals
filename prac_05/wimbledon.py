@@ -14,6 +14,10 @@ def main():
     with open(FILENAME,"r", encoding="utf-8-sig") as in_file:
         reader = csv.reader(in_file)
         next(reader)
-        print(list(reader))
+        information_champions = [[information[1],information[2]] for information in list(reader)]
+        print(information_champions)
+
+
+
 
 main()
