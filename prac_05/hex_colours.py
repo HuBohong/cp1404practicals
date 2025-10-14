@@ -10,8 +10,7 @@ def main():
             print(user_color, "is", COLOR_TO_CODE[user_color])
             user_color = input("Enter color code: ").strip().title()
         except KeyError:
-            print("Invalid color name")
-            user_color = input("Enter color code: ").strip().title()
+            user_color = input("Invalid color name please enter correct color code: ").strip().title()
 
 
 main()
