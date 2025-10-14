@@ -19,7 +19,14 @@ def get_user_info(email_to_name):
 
     while user_email != "":
         user_name = user_email.strip().replace(".", " ").split("@")[0].title()
-
+        is_username = input(f"Is your name {user_name}? (Y/n)")
+        if is_username.upper() == "Y":
+            email_to_name[user_email] = user_name
+            user_email = input("Enter your email address: ")
+        else:
+            user_name = input("Please enter your name")
+            email_to_name[user_email] = user_name
+            user_email = input("Enter your email address: ")
 
 
 main()
