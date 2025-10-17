@@ -20,7 +20,7 @@ def get_format_sentence(word_to_count):
         words = user_sentence.strip().replace(".", "").split(" ")
         for word in words:
             word_to_count[word] = word_to_count.get(word, 0) + 1
-        user_sentence = input("Enter any sentence you like:")
+        user_sentence = input("Enter any sentence you like:").strip()
 
 
 def get_format_width(word_to_count):
