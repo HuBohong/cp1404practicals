@@ -15,7 +15,7 @@ def main():
 
 def get_format_sentence(word_to_count):
     """Get user sentence and count word occurrences."""
-    user_sentence = input("Enter any sentence you like:")
+    user_sentence = input("Enter any sentence you like:").strip()
     while user_sentence != "":
         words = user_sentence.strip().replace(".", "").split(" ")
         for word in words:
