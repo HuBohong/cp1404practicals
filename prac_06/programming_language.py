@@ -1,3 +1,10 @@
+"""
+Estimate: 20 min
+start: 3:10
+finish: 3:34
+CP1404/CP5632 - Practical - Programming Language class
+"""
+
 class ProgrammingLanguage:
     def __init__(self, name="", typing="", reflection="", year=0):
         """
