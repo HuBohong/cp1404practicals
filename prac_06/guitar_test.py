@@ -1,3 +1,8 @@
+"""
+CP1404/CP5632 - Practical - Programming Language class
+Guitar class test program.
+"""
+
 from prac_06.guitar import Guitar
 
 

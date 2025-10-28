@@ -1,11 +1,22 @@
+"""
+CP1404/CP5632 - Practical - Programming Language class
+Guitar program that stores guitar details.
+Estimate: 10 minutes
+Start time: 4:45
+Finish time: 5:00
+"""
+
+
 from prac_06.guitar import Guitar
 
 
 def main():
+    """Get guitar detail and print objects in formatted way."""
     guitars = get_guitars()
     print_in_format(guitars)
 
 def get_guitars():
+    """Get guitar details from user"""
     guitars = []
     guitar_name = input("Name: ")
     while guitar_name != "":
@@ -21,6 +32,7 @@ def get_guitars():
     return guitars
 
 def print_in_format(guitars):
+    """Prints the guitars in a formatted way."""
     print("These are my guitars:")
     for i, guitar in enumerate(guitars, 1):
         vintage_string = "(vintage)" if guitar.is_vintage() else" "

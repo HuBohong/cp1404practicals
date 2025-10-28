@@ -1,8 +1,8 @@
 """
+CP1404/CP5632 - Practical - Programming Language class
 Estimate: 20 min
 start: 3:10
 finish: 3:34
-CP1404/CP5632 - Practical - Programming Language class
 """
 
 from prac_06.programming_language import ProgrammingLanguage

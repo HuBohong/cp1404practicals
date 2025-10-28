@@ -3,7 +3,6 @@ Estimate: 30 minutes
 Start time: 4:00
 Finish time: 4:21
 """
-from prac_06.programming_language import ProgrammingLanguage
 
 VINTAGE_THRESHOLD = 50
 CURRENT_YEAR = 2025
