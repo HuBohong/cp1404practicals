@@ -24,7 +24,7 @@ def main():
         elif user_choice == "F":
             pass
         elif user_choice == "A":
-            pass
+            add_project(projects)
         elif user_choice == "U":
             pass
         else:
@@ -48,12 +48,24 @@ def load_projects(filename=FILENAME):
 
 def display_projects(projects):
     print("Incomplete projects:")
-    for i,project in enumerate(projects):
+    for i, project in enumerate(projects):
         if int(project.completion_percentage) < 100:
             print(f"{i} {project}")
 
     print("Complete projects:")
-    for i,project in enumerate(projects):
+    for i, project in enumerate(projects):
         if int(project.completion_percentage) == 100:
             print(f"{i} {project}")
+
+
+def add_project(projects):
+    name = input("Name: ")
+    start_date = input("Start date (dd/mm/yyyy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    completion_percentage = int(input("Percent complete: "))
+    project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+    projects.append(project)
+
+
 main()
