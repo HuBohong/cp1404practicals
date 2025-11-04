@@ -1,21 +1,48 @@
 from prac_07.project import Project
 
-FILENAME = "project.txt"
-
+FILENAME = "projects.txt"
+MENU = """- (L)oad projects  
+- (S)ave projects  
+- (D)isplay projects  
+- (F)ilter projects by date
+- (A)dd new project  
+- (U)pdate project
+- (Q)uit"""
 
 def main():
-    projects = load_projects()
+    projects,count = load_projects(FILENAME)
+    print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n"+ MENU)
+    user_choice = input(">>>").upper()
+    while user_choice != "Q":
+        if user_choice == "L":
+            pass
+        elif user_choice == "S":
+            pass
+        elif user_choice == "D":
+            pass
+        elif user_choice == "F":
+            pass
+        elif user_choice == "A":
+            pass
+        elif user_choice == "U":
+            pass
+        else:
+            print("Invalid menu choice")
+        user_choice = input(">>>").upper()
+        print(MENU)
 
 
-def load_projects():
+def load_projects(filename=FILENAME):
     projects = []
-    with (open('projects.txt', 'r') as in_file):
+    count = 0
+    with (open(filename, 'r') as in_file):
         in_file.readline()
         for line in in_file:
             name, start_date, priority, cost_estimate, completion_percentage = line.strip().split("\t")
             project = Project(name, start_date, priority, cost_estimate, completion_percentage)
             projects.append(project)
-    return projects
+            count += 1
+    return projects, count
 
 
 main()
