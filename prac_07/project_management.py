@@ -1,4 +1,5 @@
 from prac_07.project import Project
+import datetime
 
 FILENAME = "projects.txt"
 MENU = """- (L)oad projects  
@@ -23,7 +24,7 @@ def main():
         elif user_choice == "D":
             display_projects(projects)
         elif user_choice == "F":
-            pass
+            filter_project(projects)
         elif user_choice == "A":
             add_project(projects)
         elif user_choice == "U":
@@ -32,6 +33,10 @@ def main():
             print("Invalid menu choice")
         print(MENU)
         user_choice = input(">>>").upper()
+    is_save_option = input(f"Would you like to save to {FILENAME}?")
+    if is_save_option == "yes":
+        save_projects(projects)
+    print("Thank you for using Pythonic Project Management")
 
 
 def load_projects(filename=FILENAME):
@@ -48,7 +53,6 @@ def load_projects(filename=FILENAME):
 
 
 def display_projects(projects):
-    # TODO: DATE SORTING
     print("Incomplete projects:")
     for i, project in enumerate(projects):
         if int(project.completion_percentage) < 100:
@@ -90,6 +94,13 @@ def update_project(projects):
     project.completion_percentage = new_percentage
     new_priority = int(input("New priority: "))
     project.priority = new_priority
+
+
+def filter_project(projects):
+    date_input = input("Show projects that start after date (dd/mm/yy):")
+    date_format = datetime.datetime.strptime(date_input, "%d/%m/%Y").date()
+    for project in projects:
+        print(project if project.start_date > date_format else None)
 
 
 main()
