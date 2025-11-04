@@ -19,7 +19,7 @@ def main():
             filename = input("Please enter the filename of your projects you would like to load: ")
             projects,count = load_projects(filename)
         elif user_choice == "S":
-            pass
+            save_projects(projects)
         elif user_choice == "D":
             display_projects(projects)
         elif user_choice == "F":
@@ -69,6 +69,13 @@ def add_project(projects):
     completion_percentage = int(input("Percent complete: "))
     project = Project(name, start_date, priority, cost_estimate, completion_percentage)
     projects.append(project)
+
+def save_projects(projects):
+    filename = input("Please enter the filename of your projects you would like to save: ")
+    with open(filename, 'w') as out_file:
+        for project in projects:
+            print(project.name, project.start_date, project.priority, project.cost_estimate, project.completion_percentage, sep="\t", file=out_file)
+    print(f"{len(projects)} projects saved to {filename}")
 
 
 main()
