@@ -59,17 +59,16 @@ def load_projects(filename=FILENAME):
 def display_projects(projects):
     print("Incomplete projects:")
     for i, project in enumerate(projects):
-        if int(project.completion_percentage) < 100:
+        if not project.is_complete():
             print(f"{i} {project}")
 
     print("Complete projects:")
     for i, project in enumerate(projects):
-        if int(project.completion_percentage) == 100:
+        if project.is_complete():
             print(f"{i} {project}")
 
 
 def add_project(projects):
-    # TODO:ERROR CHECKING
     name = input("Name: ")
     start_date = input("Start date (dd/mm/yyyy): ")
     priority = int(input("Priority: "))
@@ -82,7 +81,7 @@ def add_project(projects):
 def save_projects(projects, filename=FILENAME):
     with open(filename, 'w') as out_file:
         for project in projects:
-            print(project.name, project.start_date, project.priority, project.cost_estimate,
+            print(project.name, project.start_date.strftime("%d/%m/%Y"), project.priority, project.cost_estimate,
                   project.completion_percentage, sep="\t", file=out_file)
     print(f"{len(projects)} projects saved to {filename}")
 
@@ -94,9 +93,11 @@ def update_project(projects):
     project = projects[project_index]
     print(project)
     new_percentage = int(input("New percentage: "))
-    project.completion_percentage = new_percentage
+    if new_percentage:
+        project.completion_percentage = new_percentage
     new_priority = int(input("New priority: "))
-    project.priority = new_priority
+    if new_priority:
+        project.priority = new_priority
 
 
 def filter_project(projects):

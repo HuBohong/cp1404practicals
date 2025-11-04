@@ -19,3 +19,6 @@ class Project:
 
     def __le__(self, other):
         return self.start_date <= other.start_date
+
+    def is_complete(self):
+        return self.completion_percentage == "100"
