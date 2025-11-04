@@ -17,7 +17,7 @@ def main():
     while user_choice != "Q":
         if user_choice == "L":
             filename = input("Please enter the filename of your projects you would like to load: ")
-            projects,count = load_projects(filename)
+            projects, count = load_projects(filename)
         elif user_choice == "S":
             save_projects(projects)
         elif user_choice == "D":
@@ -27,11 +27,11 @@ def main():
         elif user_choice == "A":
             add_project(projects)
         elif user_choice == "U":
-            pass
+            update_project(projects)
         else:
             print("Invalid menu choice")
-        user_choice = input(">>>").upper()
         print(MENU)
+        user_choice = input(">>>").upper()
 
 
 def load_projects(filename=FILENAME):
@@ -48,7 +48,7 @@ def load_projects(filename=FILENAME):
 
 
 def display_projects(projects):
-    #TODO: DATE SORTING
+    # TODO: DATE SORTING
     print("Incomplete projects:")
     for i, project in enumerate(projects):
         if int(project.completion_percentage) < 100:
@@ -61,7 +61,7 @@ def display_projects(projects):
 
 
 def add_project(projects):
-    #TODO:ERROR CHECKING
+    # TODO:ERROR CHECKING
     name = input("Name: ")
     start_date = input("Start date (dd/mm/yyyy): ")
     priority = int(input("Priority: "))
@@ -70,12 +70,26 @@ def add_project(projects):
     project = Project(name, start_date, priority, cost_estimate, completion_percentage)
     projects.append(project)
 
+
 def save_projects(projects):
     filename = input("Please enter the filename of your projects you would like to save: ")
     with open(filename, 'w') as out_file:
         for project in projects:
-            print(project.name, project.start_date, project.priority, project.cost_estimate, project.completion_percentage, sep="\t", file=out_file)
+            print(project.name, project.start_date, project.priority, project.cost_estimate,
+                  project.completion_percentage, sep="\t", file=out_file)
     print(f"{len(projects)} projects saved to {filename}")
+
+
+def update_project(projects):
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    project_index = int(input("Project choice: "))
+    project = projects[project_index]
+    print(project)
+    new_percentage = int(input("New percentage: "))
+    project.completion_percentage = new_percentage
+    new_priority = int(input("New priority: "))
+    project.priority = new_priority
 
 
 main()
