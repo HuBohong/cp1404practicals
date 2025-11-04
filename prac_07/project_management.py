@@ -9,9 +9,10 @@ MENU = """- (L)oad projects
 - (U)pdate project
 - (Q)uit"""
 
+
 def main():
-    projects,count = load_projects(FILENAME)
-    print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n"+ MENU)
+    projects, count = load_projects(FILENAME)
+    print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n" + MENU)
     user_choice = input(">>>").upper()
     while user_choice != "Q":
         if user_choice == "L":
@@ -19,7 +20,7 @@ def main():
         elif user_choice == "S":
             pass
         elif user_choice == "D":
-            pass
+            display_projects(projects)
         elif user_choice == "F":
             pass
         elif user_choice == "A":
@@ -45,4 +46,14 @@ def load_projects(filename=FILENAME):
     return projects, count
 
 
+def display_projects(projects):
+    print("Incomplete projects:")
+    for i,project in enumerate(projects):
+        if int(project.completion_percentage) < 100:
+            print(f"{i} {project}")
+
+    print("Complete projects:")
+    for i,project in enumerate(projects):
+        if int(project.completion_percentage) == 100:
+            print(f"{i} {project}")
 main()
