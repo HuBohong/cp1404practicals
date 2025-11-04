@@ -16,7 +16,8 @@ def main():
     user_choice = input(">>>").upper()
     while user_choice != "Q":
         if user_choice == "L":
-            pass
+            filename = input("Please enter the filename of your projects you would like to load: ")
+            projects,count = load_projects(filename)
         elif user_choice == "S":
             pass
         elif user_choice == "D":
@@ -47,6 +48,7 @@ def load_projects(filename=FILENAME):
 
 
 def display_projects(projects):
+    #TODO: DATE SORTING
     print("Incomplete projects:")
     for i, project in enumerate(projects):
         if int(project.completion_percentage) < 100:
@@ -59,6 +61,7 @@ def display_projects(projects):
 
 
 def add_project(projects):
+    #TODO:ERROR CHECKING
     name = input("Name: ")
     start_date = input("Start date (dd/mm/yyyy): ")
     priority = int(input("Priority: "))
