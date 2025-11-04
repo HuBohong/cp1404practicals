@@ -17,7 +17,7 @@ def load_guitars(filename):
             name, year, cost = line.strip().split(",")
             guitar = Guitar(name, int(year), float(cost))
             guitars.append(guitar)
-
+    guitars.sort()
     return guitars
 
 
