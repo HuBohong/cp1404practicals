@@ -12,6 +12,7 @@ MENU = """- (L)oad projects
 
 
 def main():
+    """Display menu and manage user choices."""
     projects, count = load_projects(FILENAME)
     print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n" + MENU)
     user_choice = input(">>>").strip().upper()
@@ -69,6 +70,7 @@ def load_projects(filename=FILENAME):
 
 
 def display_projects(projects):
+    """ Display incomplete and complete projects."""
     print("Incomplete projects:")
     for i, project in enumerate(projects):
         if not project.is_complete():
@@ -106,6 +108,7 @@ def add_project(projects):
 
 
 def save_projects(projects, filename=FILENAME):
+    """ Save projects to a file."""
     with open(filename, 'w') as out_file:
         for project in projects:
             print(project.name, project.start_date.strftime("%d/%m/%Y"), project.priority, project.cost_estimate,
@@ -117,7 +120,6 @@ def update_project(projects):
     """ Update a project's completion percentage and priority."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
-    print(len(projects))
     project_index = int(input("Project choice: "))
     while project_index < 0 or project_index > len(projects) - 1:
         print("Invalid project number")
