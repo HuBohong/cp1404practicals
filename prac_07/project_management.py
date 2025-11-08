@@ -14,15 +14,15 @@ MENU = """- (L)oad projects
 def main():
     projects, count = load_projects(FILENAME)
     print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n" + MENU)
-    user_choice = input(">>>").upper()
+    user_choice = input(">>>").strip().upper()
     while user_choice != "Q":
         if user_choice == "L":
-            filename = input("Please enter the filename of your projects you would like to load: ")
+            filename = input("Please enter the filename of your projects you would like to load: ").strip()
             projects, count = load_projects(filename)
         elif user_choice == "S":
             user_filename = input("Please enter the filename of your projects you would like to save: ").strip()
             if user_filename:
-                save_projects(projects, filename)
+                save_projects(projects, user_filename)
             else:
                 save_projects(projects)
         elif user_choice == "D":
@@ -44,15 +44,27 @@ def main():
 
 
 def load_projects(filename=FILENAME):
+    """Load projects from a file."""
     projects = []
     count = 0
-    with (open(filename, 'r') as in_file):
-        in_file.readline()
-        for line in in_file:
-            name, start_date, priority, cost_estimate, completion_percentage = line.strip().split("\t")
-            project = Project(name, start_date, priority, cost_estimate, completion_percentage)
-            projects.append(project)
-            count += 1
+    try:
+        with (open(filename, 'r') as in_file):
+            in_file.readline()
+            for line in in_file:
+                parts = line.strip().split("\t")
+                name = parts[0]
+                start_date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
+                priority = int(parts[2])
+                cost_estimate = float(parts[3])
+                completion_percentage = int(parts[4])
+                project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+                projects.append(project)
+                count += 1
+
+    except FileNotFoundError:
+        print(f"No file named {filename} found. Starting with an empty project list.")
+        return [], count
+
     return projects, count
 
 
