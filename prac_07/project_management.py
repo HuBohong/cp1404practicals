@@ -113,8 +113,16 @@ def update_project(projects):
 
 
 def filter_project(projects):
-    date_input = input("Show projects that start after date (dd/mm/yy):")
-    date_format = datetime.datetime.strptime(date_input, "%d/%m/%Y").date()
+    """Filter projects by start date."""
+    is_valid = False
+    while not is_valid:
+        try:
+            date_input = input("Show projects that start after date (dd/mm/yy):")
+            date_format = datetime.datetime.strptime(date_input, "%d/%m/%Y").date()
+            is_valid = True
+        except ValueError:
+            print("Invalid date format. Please enter the date in dd/mm/yyyy format:")
+
     for project in projects:
         print(project if project.start_date > date_format else None)
 
