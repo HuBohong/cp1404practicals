@@ -34,4 +34,9 @@ class Project:
 
     def is_complete(self):
         """ Check if the project is complete. """
-        return self.completion_percentage == "100"
+        return self.completion_percentage == 100
+
+    def update(self, new_percentage=None, new_priority=None):
+        """update the project's completion percentage and priority."""
+        self.completion_percentage = new_percentage
+        self.priority = new_priority

@@ -99,17 +99,26 @@ def save_projects(projects, filename=FILENAME):
 
 
 def update_project(projects):
+    """ Update a project's completion percentage and priority."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
+    print(len(projects))
     project_index = int(input("Project choice: "))
+    while project_index < 0 or project_index > len(projects)-1:
+        print("Invalid project number")
+        project_index = int(input("Project choice: "))
     project = projects[project_index]
     print(project)
     new_percentage = int(input("New percentage: "))
+
     if new_percentage:
-        project.completion_percentage = new_percentage
+        while new_percentage < 0 or new_percentage > 100:
+            print("Invalid percentage")
+            new_percentage = int(input("New percentage: "))
     new_priority = int(input("New priority: "))
     if new_priority:
         project.priority = new_priority
+    project.update(new_percentage, new_priority)
 
 
 def filter_project(projects):
