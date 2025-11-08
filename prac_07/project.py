@@ -1,4 +1,3 @@
-import datetime
 
 class Project:
     def __init__(self, name, start_date, priority, cost_estimate, completion_percentage):
@@ -36,7 +35,7 @@ class Project:
         """ Check if the project is complete. """
         return self.completion_percentage == 100
 
-    def update(self, new_percentage=None, new_priority=None):
+    def update(self, new_percentage, new_priority):
         """update the project's completion percentage and priority."""
         self.completion_percentage = new_percentage
         self.priority = new_priority

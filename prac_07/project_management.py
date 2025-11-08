@@ -81,11 +81,26 @@ def display_projects(projects):
 
 
 def add_project(projects):
-    name = input("Name: ")
-    start_date = input("Start date (dd/mm/yyyy): ")
-    priority = int(input("Priority: "))
-    cost_estimate = float(input("Cost estimate: $"))
-    completion_percentage = int(input("Percent complete: "))
+    """ Add a new project to the projects list."""
+    name = input("Name: ").strip()
+    is_valid_date = False
+    while not is_valid_date:
+        try:
+            start_date_str = input("Start date (dd/mm/yyyy): ")
+            start_date = datetime.datetime.strptime(start_date_str, "%d/%m/%Y").date()
+            is_valid_date = True
+        except ValueError:
+            print("Invalid date format. Please enter the date in dd/mm/yyyy format")
+
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            priority = int(input("Priority: "))
+            cost_estimate = float(input("Cost estimate: $"))
+            completion_percentage = int(input("Percent complete: "))
+            is_valid_input = True
+        except ValueError:
+            print("Invalid input.")
     project = Project(name, start_date, priority, cost_estimate, completion_percentage)
     projects.append(project)
 
@@ -104,19 +119,19 @@ def update_project(projects):
         print(f"{i} {project}")
     print(len(projects))
     project_index = int(input("Project choice: "))
-    while project_index < 0 or project_index > len(projects)-1:
+    while project_index < 0 or project_index > len(projects) - 1:
         print("Invalid project number")
         project_index = int(input("Project choice: "))
     project = projects[project_index]
     print(project)
     new_percentage = int(input("New percentage: "))
 
-    if new_percentage:
+    if new_percentage != "":
         while new_percentage < 0 or new_percentage > 100:
             print("Invalid percentage")
             new_percentage = int(input("New percentage: "))
     new_priority = int(input("New priority: "))
-    if new_priority:
+    if new_priority > 0:
         project.priority = new_priority
     project.update(new_percentage, new_priority)
 
