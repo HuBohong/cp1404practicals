@@ -8,8 +8,10 @@ class BoxLayoutDemo(App):
         self.root = Builder.load_file('box_layout.kv')
         return self.root
 
-    def handle_greet(self,button):
+    def handle_greet(self):
         name = self.root.ids.name_input.text
         self.root.ids.output_label.text = f"Hello, {name}!"
 
+    def handle_clear(self):
+        self.root.ids.name_input.text = ""
 BoxLayoutDemo().run()
