@@ -3,6 +3,7 @@ from kivy.lang import Builder
 
 CONVERT_TO_KM = 1.60934
 
+
 class MilesConverterApp(App):
     def build(self):
         """ build kivy frame """
@@ -24,10 +25,11 @@ class MilesConverterApp(App):
         except ValueError:
             return 0.0
 
-    def handle_change(self,change):
+    def handle_change(self, change):
         """ calculate change when up or down on click """
         miles = self.get_valid_miles()
         new_miles = miles + change
         self.root.ids.input_miles.text = str(new_miles)
+
 
 MilesConverterApp().run()
