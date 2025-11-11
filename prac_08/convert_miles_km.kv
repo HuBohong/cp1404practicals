@@ -14,5 +14,8 @@ BoxLayout:
                 text:"Down"
     Button:
         text:"Convert miles to km"
+        on_press:app.convert_miles_km()
     Label:
-        text:"123"
+        id:output_id
+        text:""
+        color: (1, 1, 0, 1)
