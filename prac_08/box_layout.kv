@@ -5,11 +5,12 @@ BoxLayout:
         text: 'Clear'
 #        on_press: app.handle_clear(self)
     TextInput:
-        text: 'two'
+        id: name_input
+        text: ''
     Button:
         text: 'Greet'
         on_press: app.handle_greet(self)
     Label:
-        id: greeting_label
+        id: output_label
         text: 'Enter your name'
         color:(1, 1, 0, 1)
