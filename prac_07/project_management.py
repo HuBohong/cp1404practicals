@@ -1,0 +1,156 @@
+from prac_07.project import Project
+import datetime
+
+FILENAME = "projects.txt"
+MENU = """- (L)oad projects  
+- (S)ave projects  
+- (D)isplay projects  
+- (F)ilter projects by date
+- (A)dd new project  
+- (U)pdate project
+- (Q)uit"""
+
+
+def main():
+    """Display menu and manage user choices."""
+    projects, count = load_projects(FILENAME)
+    print(f"Welcome to Pythonic Project Management\nLoaded {count} projects from {FILENAME}\n" + MENU)
+    user_choice = input(">>>").strip().upper()
+    while user_choice != "Q":
+        if user_choice == "L":
+            filename = input("Please enter the filename of your projects you would like to load: ").strip()
+            projects, count = load_projects(filename)
+        elif user_choice == "S":
+            user_filename = input("Please enter the filename of your projects you would like to save: ").strip()
+            if user_filename:
+                save_projects(projects, user_filename)
+            else:
+                save_projects(projects)
+        elif user_choice == "D":
+            display_projects(projects)
+        elif user_choice == "F":
+            filter_project(projects)
+        elif user_choice == "A":
+            add_project(projects)
+        elif user_choice == "U":
+            update_project(projects)
+        else:
+            print("Invalid menu choice")
+        print(MENU)
+        user_choice = input(">>>").upper()
+    is_save_option = input(f"Would you like to save to {FILENAME}?")
+    if is_save_option == "yes":
+        save_projects(projects)
+    print("Thank you for using Pythonic Project Management")
+
+
+def load_projects(filename=FILENAME):
+    """Load projects from a file."""
+    projects = []
+    count = 0
+    try:
+        with (open(filename, 'r') as in_file):
+            in_file.readline()
+            for line in in_file:
+                parts = line.strip().split("\t")
+                name = parts[0]
+                start_date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
+                priority = int(parts[2])
+                cost_estimate = float(parts[3])
+                completion_percentage = int(parts[4])
+                project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+                projects.append(project)
+                count += 1
+
+    except FileNotFoundError:
+        print(f"No file named {filename} found. Starting with an empty project list.")
+        return [], count
+
+    return projects, count
+
+
+def display_projects(projects):
+    """ Display incomplete and complete projects."""
+    print("Incomplete projects:")
+    for i, project in enumerate(projects):
+        if not project.is_complete():
+            print(f"{i} {project}")
+
+    print("Complete projects:")
+    for i, project in enumerate(projects):
+        if project.is_complete():
+            print(f"{i} {project}")
+
+
+def add_project(projects):
+    """ Add a new project to the projects list."""
+    name = input("Name: ").strip()
+    is_valid_date = False
+    while not is_valid_date:
+        try:
+            start_date_str = input("Start date (dd/mm/yyyy): ")
+            start_date = datetime.datetime.strptime(start_date_str, "%d/%m/%Y").date()
+            is_valid_date = True
+        except ValueError:
+            print("Invalid date format. Please enter the date in dd/mm/yyyy format")
+
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            priority = int(input("Priority: "))
+            cost_estimate = float(input("Cost estimate: $"))
+            completion_percentage = int(input("Percent complete: "))
+            is_valid_input = True
+        except ValueError:
+            print("Invalid input.")
+    project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+    projects.append(project)
+
+
+def save_projects(projects, filename=FILENAME):
+    """ Save projects to a file."""
+    with open(filename, 'w') as out_file:
+        for project in projects:
+            print(project.name, project.start_date.strftime("%d/%m/%Y"), project.priority, project.cost_estimate,
+                  project.completion_percentage, sep="\t", file=out_file)
+    print(f"{len(projects)} projects saved to {filename}")
+
+
+def update_project(projects):
+    """ Update a project's completion percentage and priority."""
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    project_index = int(input("Project choice: "))
+    while project_index < 0 or project_index > len(projects) - 1:
+        print("Invalid project number")
+        project_index = int(input("Project choice: "))
+    project = projects[project_index]
+    print(project)
+    new_percentage = int(input("New percentage: "))
+
+    if new_percentage != "":
+        while new_percentage < 0 or new_percentage > 100:
+            print("Invalid percentage")
+            new_percentage = int(input("New percentage: "))
+    new_priority = int(input("New priority: "))
+    if new_priority > 0:
+        project.priority = new_priority
+    project.update(new_percentage, new_priority)
+
+
+def filter_project(projects):
+    """Filter projects by start date."""
+    is_valid = False
+    while not is_valid:
+        try:
+            date_input = input("Show projects that start after date (dd/mm/yy):")
+            date_format = datetime.datetime.strptime(date_input, "%d/%m/%Y").date()
+            is_valid = True
+        except ValueError:
+            print("Invalid date format. Please enter the date in dd/mm/yyyy format:")
+
+    for project in projects:
+        print(project if project.start_date > date_format else None)
+
+
+main()
