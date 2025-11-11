@@ -1,0 +1,42 @@
+"""
+CP1404/CP5632 - Practical - Programming Language class
+Guitar program that stores guitar details.
+Estimate: 10 minutes
+Start time: 4:45
+Finish time: 5:00
+"""
+
+
+from prac_06.guitar import Guitar
+
+
+def main():
+    """Get guitar detail and print objects in formatted way."""
+    guitars = get_guitars()
+    print_in_format(guitars)
+
+def get_guitars():
+    """Get guitar details from user"""
+    guitars = []
+    guitar_name = input("Name: ")
+    while guitar_name != "":
+        guitar_year = int(input("Year: "))
+        guitar_cost = float(input("Cost: ").replace("$", ""))
+        guitar = Guitar(guitar_name, guitar_year, guitar_cost)
+        guitars.append(guitar)
+        print(f"{guitar} added.")
+        guitar_name = input("Name: ")
+    # guitars.append(Guitar("Gibson L-5 CES", 1922, 16035.40))
+    # guitars.append(Guitar("Line 6 JTV-59", 2010, 1512.9))
+
+    return guitars
+
+def print_in_format(guitars):
+    """Prints the guitars in a formatted way."""
+    print("These are my guitars:")
+    for i, guitar in enumerate(guitars, 1):
+        vintage_string = "(vintage)" if guitar.is_vintage() else" "
+        print(f"Guitar {i}: {guitar.name:>20} ({guitar.year}), worth ${guitar.cost:10,.2f}{vintage_string}")
+
+
+main()
