@@ -9,14 +9,13 @@ class Band:
         self.name = name
         self.musicians = []
 
-    def add(self, musician:Musician):
+    def add(self, musician: Musician):
         """Add a musician to the band."""
         self.musicians.append(musician)
 
     def play(self):
         """Return a string of all musicians playing their instruments."""
+        musicians_plays = []
         for musician in self.musicians:
-            if len(musician.instruments) == 0:
-                print(f"{musician.name} needs an instrument!")
-            else:
-                print(f"{musician.name} is playing: {musician.instruments[0]}")
+            musicians_plays.append(musician.play())
+        return "\n".join(musicians_plays)
