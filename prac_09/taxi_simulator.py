@@ -13,6 +13,7 @@ def main():
             pass
         if customer_choice == "d":
             pass
+        customer_choice = input(f"{MENU}\n>>> ").lower()
 
 
 main()
