@@ -13,4 +13,10 @@ class Band:
         """Add a musician to the band."""
         self.musicians.append(musician)
 
-
+    def play(self):
+        """Return a string of all musicians playing their instruments."""
+        for musician in self.musicians:
+            if len(musician.instruments) == 0:
+                print(f"{musician.name} needs an instrument!")
+            else:
+                print(f"{musician.name} is playing: {musician.instruments[0]}")
