@@ -5,10 +5,12 @@ MENU = "q)uit, c)hoose taxi, d)rive"
 
 
 def main():
+    """Menu program to simulate a taxi service."""
     taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2), SilverServiceTaxi("Hummer", 200, 4)]
     current_taxi = None
     current_bill = 0.0
-    customer_choice = input(f"{MENU}\n>>> ").lower()
+    customer_choice = input(f"{MENU}\n>>> ").lower().strip()
+
     while customer_choice != "q":
         if customer_choice == "c":
             display_taxi(taxis)
@@ -16,7 +18,12 @@ def main():
         if customer_choice == "d":
             current_taxi, trip_cost = drive_taxi(current_taxi)
             current_bill += trip_cost
+        print(f"Current bill: ${current_bill:.2f}")
         customer_choice = input(f"{MENU}\n>>> ").lower()
+
+    print(f"Total trip cost: ${current_bill:.2f}")
+    print("Taxis are now:")
+    display_taxi(taxis)
 
 
 def drive_taxi(current_taxi):
