@@ -11,7 +11,8 @@ def main():
     customer_choice = input(f"{MENU}\n>>> ").lower()
     while customer_choice != "q":
         if customer_choice == "c":
-            pass
+            display_taxi(taxis)
+            # current_taxi = choose_taxi(taxis)
         if customer_choice == "d":
             current_taxi, trip_cost = drive_taxi(current_taxi)
             current_bill += trip_cost
@@ -30,6 +31,11 @@ def drive_taxi(current_taxi):
         print(f"Your {current_taxi.name} trip cost you ${trip_cost}")
 
     return current_taxi, trip_cost
+
+def display_taxi(taxis):
+    print("Taxis available:")
+    for i, taxi in enumerate(taxis):
+        print(f"{i} - {taxi}")
 
 
 main()
