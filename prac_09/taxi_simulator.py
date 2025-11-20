@@ -12,7 +12,7 @@ def main():
     while customer_choice != "q":
         if customer_choice == "c":
             display_taxi(taxis)
-            # current_taxi = choose_taxi(taxis)
+            current_taxi = choose_taxi(taxis)
         if customer_choice == "d":
             current_taxi, trip_cost = drive_taxi(current_taxi)
             current_bill += trip_cost
@@ -20,6 +20,7 @@ def main():
 
 
 def drive_taxi(current_taxi):
+    """Drive the chosen taxi a given distance and return the trip cost."""
     trip_cost = 0.0
     if current_taxi is None:
         print("You need to choose a taxi before you can drive")
@@ -32,10 +33,21 @@ def drive_taxi(current_taxi):
 
     return current_taxi, trip_cost
 
+
 def display_taxi(taxis):
+    """Display the list of taxis."""
     print("Taxis available:")
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
+
+
+def choose_taxi(taxis):
+    """Choose a taxi from the list."""
+    taxi_choice = int(input("Choose taxi: "))
+    while taxi_choice < 0 or taxi_choice >= len(taxis):
+        print("Invalid taxi choice")
+        taxi_choice = int(input("Choose taxi: "))
+    return taxis[taxi_choice]
 
 
 main()
