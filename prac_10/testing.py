@@ -73,11 +73,21 @@ def phrase_to_sentence(phrase):
     """
     Format a phrase as a sentence: capital letter start, single full stop ending.
 
-    >>> phrase_to_sentence('hello')
+    >>> phrase_to_sentence("hello")
     'Hello.'
-    >>> phrase_to_sentence('It is an ex parrot.')
+    >>> phrase_to_sentence("It is an ex parrot.")
     'It is an ex parrot.'
 
     """
+    phrase = phrase.strip()  # remove whitespace
 
-    pass
+    if not phrase:
+        return ""
+
+    # Capitalise the first letter
+    phrase = phrase[0].upper() + phrase[1:]
+
+    if phrase[-1] != ".":
+        phrase += "."
+
+    return phrase
